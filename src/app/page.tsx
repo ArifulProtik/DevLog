@@ -2,10 +2,5 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 export default function Home() {
-  return (
-    <main>
-      <Button>Hello</Button>
-      Hello
-    </main>
-  );
+  return <main></main>;
 }

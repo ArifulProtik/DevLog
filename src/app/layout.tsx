@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import NavBar from "@/components/NavBar";
 
 const space = Space_Grotesk({ subsets: ["latin"], variable: "--font-space" });
 
@@ -16,7 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${space.variable} font-sans`}>{children}</body>
+      <body className={`${space.variable} font-sans`}>
+        <NavBar />
+        {children}
+      </body>
     </html>
   );
 }
