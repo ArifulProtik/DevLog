@@ -1,6 +1,7 @@
 import { Label } from './ui/label';
 import { Button } from './ui/button';
 import { GrGoogle, GrGithub } from 'react-icons/gr';
+import { signIn } from '@/auth';
 
 import {
   DialogClose,
@@ -24,13 +25,24 @@ export default function SignInBox() {
         </DialogHeader>
 
         <div className='mt-8 flex w-full flex-col items-center justify-center gap-4'>
-          <Button variant={'outline'} className='w-full rounded'>
+          <Button type='submit' variant={'outline'} className='w-full rounded'>
             <GrGoogle className='mr-2 h-4 w-4' /> Sign In with Google
           </Button>
-
-          <Button variant={'outline'} className='w-full rounded'>
-            <GrGithub className='mr-2 h-4 w-4' /> Sign In with Github
-          </Button>
+          <form
+            className='w-full'
+            action={async () => {
+              'use server';
+              await signIn('github');
+            }}
+          >
+            <Button
+              type='submit'
+              variant={'outline'}
+              className='w-full rounded'
+            >
+              <GrGithub className='mr-2 h-4 w-4' /> Sign In with Github
+            </Button>
+          </form>
 
           <Separator />
 
