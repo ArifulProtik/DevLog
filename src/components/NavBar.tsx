@@ -3,6 +3,10 @@ import { Button } from './ui/button';
 import { Separator } from './ui/separator';
 import SignInBox from './SignInBox';
 import { auth } from '@/auth';
+import { Popover, PopoverTrigger } from '@/components/ui/popover';
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import ProfileBar from './ProfileBar';
+import { getIntialOfName } from '@/lib/utils';
 
 export default async function NavBar() {
   const session = await auth();
@@ -16,9 +20,17 @@ export default async function NavBar() {
           </Button>
 
           {session ? (
-            <Button className='rounded text-lg font-normal' variant={'ghost'}>
-              {session?.user?.name}
-            </Button>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Avatar>
+                  <AvatarImage src={session?.user?.image!} alt='@shadcn' />
+                  <AvatarFallback>
+                    {getIntialOfName(session.user?.name!)}
+                  </AvatarFallback>
+                </Avatar>
+              </PopoverTrigger>
+              <ProfileBar name={session.user?.name!} />
+            </Popover>
           ) : (
             <Dialog>
               <DialogTrigger asChild>

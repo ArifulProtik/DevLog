@@ -45,8 +45,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             })
             .returning();
           user.id = newUser?.id;
+          user.name = newUser?.name;
+          user.image = newUser?.profile_pic;
         } else {
           user.id = exitstingUser.id;
+          user.name = exitstingUser?.name;
+          user.image = exitstingUser?.profile_pic;
         }
         return true;
       } catch (error) {
